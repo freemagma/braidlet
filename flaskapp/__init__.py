@@ -12,8 +12,8 @@ def create_app():
         init_query = DEFAULT_INIT_QUERY
         if "braids" not in session:
             braids = [
-                {"id": str(0), "input_form": str([0, 1, 2, 3])},
-                {"id": str(1), "input_form": str([0] * 50)},
+                {"id": str(0), "input_form": str([1, 2, 1])},
+                {"id": str(1), "input_form": str([2, 1, 2])},
             ]
         else:
             braids = session["braids"]
@@ -31,9 +31,7 @@ def create_app():
                     braid = parse_braid(request.form["add_braid"], braids)
                     braid_dct = {
                         "id": new_braid_num,
-                        "input_form": str(
-                            parse_braid(request.form["add_braid"], braids)
-                        ),
+                        "input_form": str(braid),
                     }
                     if braid is not None:
                         braids.append(braid_dct)
