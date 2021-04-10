@@ -1,35 +1,31 @@
 import braidlet as br
-import subprocess
+from math_braid import Braid
 
 
 def word_problem(b1):
-    sb1 = ", ".join(b1)
-    output = subprocess.check_output(["sage", "sage/word_problem.sage", f'"{sb1}"'])
-    result = output == "True"
+    bb1, bb2 = create_braid_objects(b1, [])
+    result = bb1 == bb2
     phrase = "is" if result else "is not"
     return f"{b1} {phrase} the identity"
 
 
 def equal(b1, b2):
-    sb1 = ", ".join(b1)
-    sb2 = ", ".join(b2)
-    output = subprocess.check_output(
-        ["sage", "sage/equal.sage", f'"{sb1}"', f'"{sb2}"']
-    )
-    result = output == "True"
+    bb1, bb2 = create_braid_objects(b1, b2)
+    result = bb1 == bb2
     phrase = "is" if result else "is not"
     return f"{b1} {phrase} equal to {b2}"
 
 
 def conjugacy_problem(b1, b2):
-    sb1 = ", ".join(b1)
-    sb2 = ", ".join(b2)
-    output = subprocess.check_output(
-        ["sage", "sage/conjugate.sage", f'"{sb1}"', f'"{sb2}"']
-    )
-    if output != "None":
-        return f"{b1} and {b2} are conjugates via {output}"
-    return f"{b1} and {b2} are not conjugates"
+    bb1, bb2 = create_braid_objects(b1, b2)
+    result = False
+    phrase = "are" if result else "are not"
+    return f"{b1} and {b2} {phrase} conjugates"
+
+
+def create_braid_objects(*braids):
+    n = max(max(map(abs, b), default=0) for b in braids) + 1
+    return tuple(Braid(b, n) for b in braids)
 
 
 DEFAULT_INIT_QUERY = "Word Problem"

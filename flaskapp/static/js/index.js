@@ -8,6 +8,7 @@ var q_group = $("#query_group");
 $(function () {
   updateQuery();
   add_btn.click(() => {
+    console.log("CLICK ADD");
     $("<input/>")
       .attr("type", "hidden")
       .attr("name", "query_type")

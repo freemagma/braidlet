@@ -1,6 +1,6 @@
 def parse_braid(s, braids):
     # TODO implement this
-    s = s.lower().strip()
+    s = s.lower().strip().replace("[", "").replace("]", "")
     b_ix = s.find("b")
     if b_ix != -1:
         b_id = int(s[(b_ix + 1) :])
