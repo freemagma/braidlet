@@ -8,22 +8,21 @@ var q_group = $("#query_group");
 $(function () {
   updateQuery();
   add_btn.click(() => {
-    console.log("CLICK ADD");
     $("<input/>")
       .attr("type", "hidden")
       .attr("name", "query_type")
       .attr("value", query_type)
-      .appendTo("#form");
+      .appendTo("#form_table");
     $("<input/>")
       .attr("type", "hidden")
       .attr("name", "new_braid_num")
       .attr("value", new_braid_num)
-      .appendTo("#form");
+      .appendTo("#form_table");
     $("<input/>")
       .attr("type", "hidden")
       .attr("name", "add_braid")
       .attr("value", $("#new_braid").val())
-      .appendTo("#form");
+      .appendTo("#form_table");
     return true;
   });
 
@@ -32,19 +31,19 @@ $(function () {
       .attr("type", "hidden")
       .attr("name", "query_type")
       .attr("value", query_type)
-      .appendTo("#form");
+      .appendTo("#form_query");
     $("<input/>")
       .attr("type", "hidden")
       .attr("name", "query")
       .attr("value", true)
-      .appendTo("#form");
+      .appendTo("#form_query");
     let inputs = $(".q_input");
     $(".q_input").each((ix, node) => {
       $("<input/>")
         .attr("type", "hidden")
         .attr("name", "input_" + ix)
         .attr("value", node.value)
-        .appendTo("#form");
+        .appendTo("#form_query");
     });
     return true;
   });

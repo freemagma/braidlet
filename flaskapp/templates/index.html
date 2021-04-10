@@ -3,83 +3,84 @@
 
 <div class="container-fluid">
     <div class="row justify-content-md-center">
-        
-            <div class="col-md-auto">
-                <div class="card text-white bg-secondary mt-2">
-                    <div class="card-body">
-                        <h1 class="card-title text-center">
-                            Braidlet
-                        </h1>
-                    </div>
-                </div>
-                <form action="/" method="POST" id="form">
-                    <div id="toolbar">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">B{{ braids | length }} =</span>
-                            </div>
-                            <input id="new_braid" type="text" class="form-control" aria-label="Product of Generators"
-                                aria-describedby="basic-addon1">
-                            <div class="input-group-append">
-                                <button id="add_braid" type="submit" class="btn btn-primary">Add Braid</button>
-                            </div>
-                        </div>
-                    </div>
-                    <table id="table" data-toolbar="#toolbar" data-toggle="table" data-search="true" data-height="500">
-                        <thead>
-                            <tr>
-                                <th data-field="id" data-visible="false">ID</th>
-                                <th data-sortable="true">Braid</th>
-                                <th data-sortable="false" data-width="800">Product of Generators</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for braid in braids %}
-                            <tr>
-                                <td>{{ braid['id'] }}</td>
-                                <td>{{ "B" + braid['id'] }}</td>
-                                <td>{{ braid['input_form'] }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="dropdown mt-2">
-                        <div class="input-group" id="query_group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ init_query }}
-                                </button>
-                                <div id="query_dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {% for query in queries.keys() %}
-                                    <a class="dropdown-item" href="#">{{ query }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="input-group-append">
-                                <button id="submit_query" type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-            
-                    </div>
-                </form>
-                {% if result %}
-                <div class="card mt-2">
-                    <h5 class="card-header">{{ init_query }} Result</h5>
-                    <div class="card-body">
-                        <p class="card-text">{{ result }}</p>
-                    </div>
-                </div>
-                {% endif %}
-    </div>
-</div>
 
-{% endblock %}
-{% block javascript%}
-<script>
-    var queries = {{ queries | tojson }};
-    var query_type = {{ init_query | tojson }};
-    var new_braid_num = {{ braids | length }};
-</script>
-<script src="/static/js/index.js"></script>
-{% endblock %}
+        <div class="col-md-auto">
+            <div class="card text-white bg-secondary mt-2">
+                <div class="card-body">
+                    <h1 class="card-title text-center">
+                        Braidlet
+                    </h1>
+                </div>
+            </div>
+            <form action="/" method="POST" id="form_table">
+                <div id="toolbar">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">B{{ braids | length }} =</span>
+                        </div>
+                        <input id="new_braid" type="text" class="form-control" aria-label="Product of Generators"
+                            aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button id="add_braid" type="submit" class="btn btn-primary">Add Braid</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="table" data-toolbar="#toolbar" data-toggle="table" data-search="true" data-height="500">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-visible="false">ID</th>
+                            <th data-sortable="true">Braid</th>
+                            <th data-sortable="false" data-width="800">Product of Generators</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for braid in braids %}
+                        <tr>
+                            <td>{{ braid['id'] }}</td>
+                            <td>{{ "B" + braid['id'] }}</td>
+                            <td>{{ braid['input_form'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            <form action="/" method="POST" id="form_query">
+                <div class="dropdown mt-2">
+                    <div class="input-group" id="query_group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ init_query }}
+                            </button>
+                            <div id="query_dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for query in queries.keys() %}
+                                <a class="dropdown-item" href="#">{{ query }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="input-group-append">
+                            <button id="submit_query" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% if result %}
+            <div class="card mt-2">
+                <h5 class="card-header">{{ init_query }} Result</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ result }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endblock %}
+    {% block javascript%}
+    <script>
+        var queries = {{ queries | tojson }};
+        var query_type = {{ init_query | tojson }};
+        var new_braid_num = {{ braids | length }};
+    </script>
+    <script src="/static/js/index.js"></script>
+    {% endblock %}
