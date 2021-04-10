@@ -12,7 +12,7 @@ clean:
 	rm -rf library/dist
 	find . | grep -E "(__pycache__|\.pyc|\.pyo$$)" | xargs rm -rf
 
-LIBRARY_FILES := $(shell find library/math-braid -type f)
+LIBRARY_FILES := $(shell find library/math_braid -type f)
 library/dist: $(LIBRARY_FILES) library/poetry.lock library/pyproject.toml
 	cd library && rm -rf dist && poetry build -f wheel
 	cd library/dist && pip wheel --no-binary :all: math_braid-*.whl
