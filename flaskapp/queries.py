@@ -1,4 +1,3 @@
-import braidlet as br
 from math_braid import Braid
 
 
