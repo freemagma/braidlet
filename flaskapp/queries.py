@@ -61,7 +61,7 @@ def jones_poly(b1):
 def Burau_unreduced(b1):
      sb1, sb2 = create_braid_objects(b1, [])
      matrix = sb1.burau_matrix()
-     return f"The unreduced Burau representation of {sb1} is \n" + str(matrix)
+     return f"The unreduced Burau representation of {sb1} is \n{matrix}"
 
 def burau_unreduced(b1):
     sb1, sb2 = create_braid_objects(b1, [])
