@@ -68,7 +68,9 @@
             <div class="card mt-2">
                 <h5 class="card-header">{{ init_query }} Result</h5>
                 <div class="card-body">
-                    <p class="card-text">{{ result }}</p>
+		    {% for res in result.split("\n") %}
+                        <p class="card-text">{{ res }}</p>
+		    {% endfor %}
                 </div>
             </div>
             {% endif %}
