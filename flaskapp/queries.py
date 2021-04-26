@@ -43,13 +43,13 @@ def gcd(b1, b2):
 
 # NOTE: the size of the braid group is important here
 def alexander_poly(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     poly = sb1.alexander_polynomial()
     return f"The Alexander polynomial of the closure of {b1} is {poly}"
 
 
 def jones_poly(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     poly = sb1.jones_polynomial()
     return f"The Jones polynomial of the closure of {b1} is {poly}"
 
@@ -58,10 +58,12 @@ def jones_poly(b1):
 ######  Representations
 ######
 
+
 def Burau_unreduced(b1):
-     sb1, sb2 = create_braid_objects(b1, [])
-     matrix = sb1.burau_matrix()
-     return f"The unreduced Burau representation of {sb1} is \n{matrix}"
+    sb1, sb2 = create_braid_objects(b1, [])
+    matrix = sb1.burau_matrix()
+    return f"The unreduced Burau representation of {sb1} is \n{matrix}"
+
 
 def burau_unreduced(b1):
     sb1, sb2 = create_braid_objects(b1, [])
@@ -105,26 +107,26 @@ def aut_Fn_representation(b1):
 
 
 def NT_type(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     nt_type = sb1.thurston_type()
     return f"{b1} is {nt_type}"
 
 
 def induced_permutation(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     permutation = sb1.permutation()
     one_to_n = [i for i in range(1, sb1.strands() + 1)]
     return f"The permutation induced by {b1} is {one_to_n} -> {permutation}"
 
 
 def gens_centralizer(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     gens = sb1.centralizer()
     return "The centralizer generators are:\n" + ",\n".join(map(str, gens))
 
 
 def num_components(b1):
-    sb1 = create_braid_objects(b1)
+    (sb1,) = create_braid_objects(b1)
     components = sb1.components_in_closure()
     return f"{b1} has {components} components in it's link closure"
 
